@@ -18,7 +18,7 @@
                   {{ item.name }}
                   <span class="date">{{ item.date }}</span>
                 </td>
-                <td>{{ item.cost }}</td>
+                <td>{{ item.cost }} zł</td>
                 <td class="controls"><button v-on:click="deleteExpense(index)" class="btn btn-delete"></button></td>
             </tr>
         </table>
@@ -36,19 +36,17 @@
 </template>
 
 <script>
+  import {db} from './firebase';
+
   export default {
     name: 'expense',
     data: () => {
       return {
-        income: 5000,
+        income: 0,
         expense: 0,
-        balance: 5000,
+        balance: 0,
         show: false,
-        items: [
-          { date: '2017-01-01', name: 'Fly to Paris', cost: 300.45 },
-          { date: '2017-01-01', name: 'Cosmetics', cost: 46.95 },
-          { date: '2017-01-01', name: 'Winter jacket', cost: 129.99 }
-        ]
+        items: []
       };
     },
     methods: {
@@ -56,9 +54,6 @@
         let date = new Date().toJSON().slice(0, 10);
         let categoryInput = document.getElementById('category');
         let cost = parseFloat(document.getElementById('cost').value);
-
-        // cost = cost
-        console.log(cost);
 
         if (!isNaN(cost)) {
           this.items.push({
@@ -84,7 +79,15 @@
       }
     },
     mounted () {
-      this.calculateBalance();
+      const ref = db.ref();
+
+      ref.on('value', (snapshot) => {
+        let data = snapshot.val();
+        console.log(data.budget.expense);
+        this.income = data.budget.income;
+        this.items = data.budget.expense;
+        this.calculateBalance();
+      });
     }
   };
 </script>
@@ -105,18 +108,20 @@
         }
     }
     .date {
-      font-size: .9em;
+      font-size: .8em;
       color: #666666;
       display: block;
     }
     .category {
       display: inline-block;
       text-transform: uppercase;
+      letter-spacing: 2px;
       &-sum {
         display: block;
         font-size: 2em;
+        letter-spacing: normal;
         text-transform: none;
-        padding: 0 15px;
+        padding: 0 25px;
       }
     }
     .btn {
@@ -126,7 +131,7 @@
       text-transform: uppercase;
       cursor: pointer;
       opacity: .5;
-      transition: all .3s ease;
+      transition: opacity .3s ease;
       &:hover {
         opacity: 1;
       }
@@ -144,13 +149,14 @@
         border-radius: 50%;
         &:before, &:after {
           content: '';
-          width: 2px;
+          width: 1px;
           height: 15px;
           display: inline-block;
           position: absolute;
           top: 50%;
           left: 50%;
           background: #180F01;
+          backface-visibility: hidden;
         }
         &:before {
           transform: translate(-50%, -50%) rotate(45deg);
