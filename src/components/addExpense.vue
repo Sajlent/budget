@@ -13,13 +13,13 @@
       <span id="balance" class="category-sum">{{ balance }} zł</span>
     </div>
     <table class="total" cellpadding="0" cellspacing="0">
-      <tr v-for="(item, index) in items">
+      <tr v-for="(item, index) in items" :id="item.id">
         <td>
           {{ item.name }}
           <span class="date">{{ item.date }}</span>
         </td>
         <td>{{ item.cost }} zł</td>
-        <td class="controls"><button v-on:click="deleteExpense(index)" class="btn btn-delete"></button></td>
+        <td class="controls"><button v-on:click="deleteExpense(index, item.id)" class="btn btn-delete"></button></td>
       </tr>
     </table>
     <button v-on:click="show = !show" class="btn btn-add">Add new</button>
@@ -57,21 +57,24 @@
         let cost = parseFloat(document.getElementById('cost').value);
 
         if (!isNaN(cost)) {
+          let newItemKey = ref.child('expense').push().key;
           let itemData = {
+            id: newItemKey,
             date: date,
             name: categoryInput.value,
             cost: cost
           };
           this.items.push(itemData);
-          let newItemKey = ref.child('expense').push().key;
           let updates = {};
           updates['/expense/' + newItemKey] = itemData;
           ref.update(updates);
           this.calculateBalance();
         }
       },
-      deleteExpense (i) {
+      deleteExpense (i, id) {
         this.items.splice(i, 1);
+        console.log(id);
+        ref.child('/expense/' + id).remove();
         this.calculateBalance();
       },
       calculateBalance () {
@@ -95,6 +98,7 @@
           let item = childSnapshot.val();
           this.items.push(item);
         });
+        console.log(this.items);
         this.calculateBalance();
       });
     }
