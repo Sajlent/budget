@@ -4,4 +4,4 @@ dist/
 npm-debug.log
 yarn-error.log
 .idea
-src/components/firebase.js
+config/dev.env.js
