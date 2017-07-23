@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Hello from '@/components/Hello';
-import expense from '@/components/addExpense';
+import Expense from '@/components/addExpense';
+import Converter from '@/components/currencyConverter';
 
 Vue.use(Router);
 
@@ -10,12 +10,12 @@ export default new Router({
     {
       path: '/',
       name: 'expense',
-      component: expense
+      component: Expense
     },
     {
-      path: '/',
-      name: 'Hello',
-      component: Hello
+      path: '/converter',
+      name: 'converter',
+      component: Converter
     }
   ]
 });
