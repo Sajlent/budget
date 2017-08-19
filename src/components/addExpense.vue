@@ -27,7 +27,7 @@
       <div v-if="show" class="expense">
         <form v-on:submit.prevent="addExpense()" id="add-expense">
           <input id="category" class="input input-category" name="category" type="text" placeholder="Category">
-          <input id="cost" class="input input-cost" name="cost" type="number" placeholder="Cost" pattern="[0-9]+([\.,][0-9]+)?" step="any" formnovalidate>
+          <input id="cost" class="input input-number" name="cost" type="number" placeholder="Cost" pattern="[0-9]+([\.,][0-9]+)?" step="any" formnovalidate>
           <button class="btn btn-save">Save</button>
         </form>
       </div>
@@ -52,9 +52,9 @@
     },
     methods: {
       addExpense () {
-        let date = new Date().toJSON().slice(0, 10);
-        let categoryInput = document.getElementById('category');
-        let cost = parseFloat(document.getElementById('cost').value);
+        const date = new Date().toJSON().slice(0, 10);
+        const categoryInput = document.getElementById('category');
+        const cost = parseFloat(document.getElementById('cost').value);
 
         if (!isNaN(cost)) {
           let newItemKey = ref.child('expense').push().key;
@@ -73,7 +73,6 @@
       },
       deleteExpense (i, id) {
         this.items.splice(i, 1);
-        console.log(id);
         ref.child('/expense/' + id).remove();
         this.calculateBalance();
       },
@@ -98,14 +97,13 @@
           let item = childSnapshot.val();
           this.items.push(item);
         });
-        console.log(this.items);
         this.calculateBalance();
       });
     }
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .total {
     width: 75%;
     margin: 50px auto;
@@ -182,17 +180,6 @@
       color: #956C1F;
       padding: 15px 30px;
       border: 2px solid #956C1F;
-    }
-  }
-  .input {
-    background: transparent;
-    padding: 15px;
-    margin-right: 10px;
-    border: none;
-    border-bottom: 1px solid #180F01;
-    &-cost {
-      -moz-appearance:textfield;
-      -webkit-appearance: none;
     }
   }
   .fade-enter-active, .fade-leave-active {

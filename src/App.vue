@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <p>
-      <router-link to="/">Budget</router-link>
-      <router-link to="/converter">Currency converter</router-link>
-    </p>
+    <nav>
+      <router-link class="nav-item" to="/">Budget</router-link>
+      <router-link class="nav-item" to="/converter">Currency converter</router-link>
+    </nav>
     <router-view></router-view>
   </div>
 </template>
@@ -14,12 +14,6 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
-}
+<style lang="scss">
+  @import "assets/main.scss";
 </style>
