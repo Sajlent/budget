@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <salary v-if="database" :income="income"></salary>
+    <fixed-expenses v-if="database" :fixedExpensesData="fixedExpensesData"></fixed-expenses>
+    <monthly-expenses v-if="database" :expenses="expenses"></monthly-expenses>
+    <loading v-else></loading>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import { db } from './components/firebase';
+  import Loading from './components/loading';
+  import Salary from './components/salary'
+  import FixedExpenses from './components/fixedExpenses';
+  import MonthlyExpenses from './components/monthlyExpenses';
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    name: 'app',
+    components: {Loading, Salary, FixedExpenses, MonthlyExpenses},
+    data: () => {
+      return {
+        database: db,
+        income: db.collection('income'),
+        fixedExpensesData: db.collection('fixedExpenses'),
+        expenses: db.collection('expenses')
+      }
+    }
+  };
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  @import "assets/sass/main.scss";
 </style>

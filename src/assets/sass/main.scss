@@ -1,0 +1,55 @@
+$color-kilamanjaro: #180F01;
+
+@import 'components/grid';
+@import 'components/header';
+
+body {
+  background: #FFFBF5;
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: $color-kilamanjaro;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  //text-align: center;
+  margin-top: 60px;
+
+  .nav-item {
+    display: inline-block;
+    font-size: 1.2em;
+    color: $color-kilamanjaro;
+    text-decoration: none;
+    padding: 3px;
+    margin: 7px;
+    &.router-link-exact-active {
+      border-bottom: 3px solid $color-kilamanjaro;
+    }
+  }
+  .input {
+    background: transparent;
+    padding: 15px;
+    margin-right: 10px;
+    border: none;
+    border-bottom: 1px solid $color-kilamanjaro;
+    &-number {
+      -moz-appearance:textfield;
+      -webkit-appearance: none;
+    }
+  }
+  .custom-select {
+    //background: transparent url('assets/arrow.svg') center right no-repeat;
+    padding: 15px 30px 15px 15px;
+    border: 1px solid $color-kilamanjaro;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+  }
+}
+
+.menu {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.table-total {
+  text-align: center;
+}
