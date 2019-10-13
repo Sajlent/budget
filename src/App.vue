@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <salary v-if="database" :income="income"></salary>
-    <fixed-expenses v-if="database" :fixedExpensesData="fixedExpensesData"></fixed-expenses>
-    <monthly-expenses v-if="database" :expenses="expenses"></monthly-expenses>
-    <loading v-else></loading>
+    <section>
+      <salary v-if="database" :income="income"></salary>
+      <fixed-expenses v-if="database" :fixedExpensesData="fixedExpensesData"></fixed-expenses>
+    </section>
+    <aside>
+      <monthly-expenses v-if="database" :expenses="expenses"></monthly-expenses>
+    </aside>
+    <loading></loading>
   </div>
 </template>
 
