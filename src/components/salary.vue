@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h2>Salary</h2>
+    <div class="box">
+        <h3>Salary</h3>
         <p>{{ salary }} PLN</p>
     </div>
 </template>

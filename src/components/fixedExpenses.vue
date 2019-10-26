@@ -1,7 +1,7 @@
 <template>
     <div>
-        <table>
-            <caption>Fixed monthly expenses</caption>
+        <h3>Fixed monthly expenses</h3>
+        <table class="table">
             <tbody>
                 <tr v-for="(item, index) in items" v-bind:key="item.id" :id="item.id">
                     <td>{{ item.name }}</td>
@@ -14,7 +14,7 @@
             <tfoot>
                 <tr>
                     <td>SUM</td>
-                    <td>{{ this.sum }}</td>
+                    <td>{{ this.sum.toFixed(2) }}</td>
                 </tr>
             </tfoot>
         </table>

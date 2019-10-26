@@ -1,5 +1,9 @@
 <template>
-    <p>loading...</p>
+    <div class="loading">
+        <div class="rhombus"></div>
+        <div class="rhombus"></div>
+        <div class="rhombus"></div>
+    </div>
 </template>
 
 <script>

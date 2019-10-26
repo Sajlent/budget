@@ -1,5 +1,5 @@
 <template>
-    <table>
+    <table class="table">
         <caption>{{ this.monthData.month }}</caption>
         <tbody>
         <tr v-for="(item, index) in this.monthData.monthlyExpenses" v-bind:key="item.id" :id="item.id">

@@ -2,3 +2,23 @@
     max-width: 1170px;
     margin: 0 auto;
 }
+
+.row {
+    display: flex;
+}
+
+.main-content {
+    flex: 1 1 75%;
+}
+
+.aside {
+    flex: 0 0 25%;
+    padding-left: 40px;
+}
+
+.box {
+    background: $color-bottle-green;
+    color: #ffffff;
+    padding: 5px 25px 12px;
+    margin-top: 20px;
+}
