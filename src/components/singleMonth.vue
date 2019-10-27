@@ -1,28 +1,30 @@
 <template>
     <table class="table">
-        <caption>{{ this.monthData.month }}</caption>
+        <caption>{{ this.id }}</caption>
         <tbody>
-        <tr v-for="(item, index) in this.monthData.monthlyExpenses" v-bind:key="item.id" :id="item.id">
-            <td>{{ item.name }}</td>
-            <td>{{ item.cost }} PLN</td>
+        <tr v-for="(item, key) in this.monthData.expenses" v-bind:key="key">
+            <td>{{ key }}</td>
+            <td>{{ item }} PLN</td>
             <td class="controls">
-<!--                <button v-on:click="deleteExpense(index, item.id)" class="btn btn-delete"></button>-->
+                <button @click="deleteExpense(key)" class="btn btn--delete">x</button>
             </td>
         </tr>
         </tbody>
         <tfoot>
-        <tr>
+        <tr class="table__sum">
             <td>SUM</td>
-            <td>{{ this.sum }}</td>
+            <td>{{ this.sum }} PLN</td>
+            <td></td>
         </tr>
         </tfoot>
     </table>
 </template>
 
 <script>
+
     export default {
         name: 'singleMonth',
-        props: ['monthData'],
+        props: ['monthData', 'id', 'onDelete'],
         data: () => {
             return {
                 monthName: '',
@@ -36,9 +38,17 @@
         },
         methods: {
             sumExpenses() {
-                this.monthData.monthlyExpenses.forEach((expense) => {
-                    this.sum += expense.cost;
-                });
+                for (let expense in this.monthData.expenses) {
+                    if (this.monthData.expenses.hasOwnProperty(expense)) {
+                        this.sum += this.monthData.expenses[expense];
+                    }
+                }
+            },
+            deleteExpense(key) {
+                delete this.monthData.expenses[key];
+                this.onDelete(this.id, key);
+
+                this.$forceUpdate();
             }
         }
     };

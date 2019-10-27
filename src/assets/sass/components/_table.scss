@@ -1,9 +1,26 @@
 .table {
     width: 100%;
-    border-collapse: collapse;
+    border-spacing: 0;
+    //border-collapse: collapse;
+    margin-bottom: 50px;
+
+    caption {
+        font-size: 1rem;
+        text-align: left;
+        background: $color-silver;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 15px;
+    }
 
     td {
         padding: 10px 0;
-        border-bottom: 1px solid $color-iron;
+        border-top: 1px solid $color-iron;
+    }
+
+    &__sum > td {
+        font-weight: bold;
+        border-top: 1px solid;
+        //border-bottom: 1px solid;
     }
 }

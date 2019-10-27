@@ -1,12 +1,15 @@
 $color-kilamanjaro: #180F01;
+$color-silver: #F3F3F6;
 $color-iron: #e5e5e7;
 $color-green: #6b962a;
 $color-bottle-green: #3e5641;
 
+@import 'components/buttons';
 @import 'components/grid';
 @import 'components/header';
 @import 'components/loading';
 @import 'components/table';
+@import 'components/text-content';
 
 body {
   background: #ffffff;

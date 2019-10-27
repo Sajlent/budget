@@ -12,9 +12,10 @@
                 </tr>
             </tbody>
             <tfoot>
-                <tr>
+                <tr class="table__sum">
                     <td>SUM</td>
                     <td>{{ this.sum.toFixed(2) }}</td>
+                    <td></td>
                 </tr>
             </tfoot>
         </table>
